@@ -19,3 +19,7 @@
 * {
   font-family: "LineSeed";
 }
+
+body{
+  background-image: url('./bg.jpg');
+}
