@@ -15,7 +15,7 @@ export default function Hero() {
       <div className="flex justify-center flex-col text-center">
         <img src="./hero.png" alt="" />
         <h1 className="text-3xl transition-all duration-300">
-          งานแข่งขันโครงงาน<span className="transition-all duration-300">{WORDS[placeholderid]}</span>
+          งานแข่งขันโครงงาน<span className="transition-all duration-300">{placeholder}</span>
         </h1>
       </div>
     </>
