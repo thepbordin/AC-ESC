@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <div className={`${navbar} fixed w-full p-4 flex justify-between`}>
+      <div className={`${navbar} fixed z-50 w-full p-4 flex justify-between`}>
         <div></div>
         <div className="bg-[#E7E9F3] p-2 rounded-full flex font-bold">
           <Link to="/" className=" bg-white px-3 py-2 rounded-full text-[#2a384a]">
@@ -40,7 +40,7 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="bg-blue-500 p-2 rounded-full flex font-extrabold">
-          <Link to="/" className="  px-3 py-2 rounded-full text-white">
+          <Link to="/register" className="  px-3 py-2 rounded-full text-white">
             สมัครเลย !
           </Link>
        

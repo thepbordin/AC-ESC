@@ -15,11 +15,29 @@
   src: url("./fonts/LINESeedSansTH_XBd.ttf");
   font-weight: 800;
 }
-
+@font-face {
+  font-family: "LineSeed";
+  src: url("./fonts/LINESeedSansTH_He.ttf");
+  font-weight: 900;
+}
 * {
   font-family: "LineSeed";
 }
 
-body{
-  background-image: url('./bg.jpg');
+body {
+  background-image: url("./bg.jpg");
+}
+
+.box-shadow {
+  box-shadow: 25px 26px 0px -1px rgba(71, 86, 166, 0.14);
+  -webkit-box-shadow: 25px 26px 0px -1px rgba(71, 86, 166, 0.14);
+  -moz-box-shadow: 25px 26px 0px -1px rgba(71, 86, 166, 0.14);
+}
+
+
+input::file-selector-button {
+  border:none;
+  background: #E7E9F3;
+  border-radius: 5px;
+  cursor: pointer;
 }
