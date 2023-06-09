@@ -3,7 +3,7 @@ import ChangingText from "./ChangingText";
 export default function Hero() {
   return (
     <>
-      <div className="text-center pt-10">
+      <div className="text-center h-screen flex justify-center items-center flex-col">
         <img
           src="./title.png"
           className="w-full max-w-[1000px] mx-auto"
