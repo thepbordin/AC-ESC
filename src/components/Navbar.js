@@ -39,12 +39,12 @@ export default function Navbar() {
             เกี่ยวกับงาน
           </Link>
         </div>
-        <div className="bg-blue-500 p-2 rounded-full flex font-extrabold">
-          <Link to="/register" className="  px-3 py-2 rounded-full text-white">
+        <Link to="/register" className="bg-blue-500 p-2 rounded-full flex font-extrabold">
+          <div className="  px-3 py-2 rounded-full text-white">
             สมัครเลย !
-          </Link>
+          </div>
        
-        </div>
+        </Link>
       </div>
     </div>
   );
