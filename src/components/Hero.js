@@ -1,37 +1,19 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
+import ChangingText from "./ChangingText";
 export default function Hero() {
-  const WORDS = ["วิทยาศาสตร์", "คอมพิวเตอร์", "คณิตศาสตร์"];
-  const [placeholderId, setPlaceholderId] = useState(0);
-  const [fadeProp, setFadeProp] = useState({ fade: "opacity-100" });
-  useEffect(() => {
-    const fadeTimeout = setInterval(() => {
-      fadeProp.fade === "opacity-0"
-        ? setFadeProp({ fade: "opacity-100" })
-        : setFadeProp({ fade: "opacity-0" });
-    }, 3000);
-    return () => clearInterval(fadeTimeout);
-  }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setPlaceholderId((prevCount) => (prevCount + 1) % WORDS.length);
-    }, 3000);
-
-    return () => clearInterval(intervalId);
-  }, []);
   return (
     <>
-      <div className="flex justify-center flex-col text-center">
-        <img src="./title.png" alt="" />
-        <h1 className="font-bold text-3xl transition-all duration-300">
+      <div className="text-center h-screen flex justify-center items-center flex-col">
+        <img
+          src="./title.png"
+          className="w-full max-w-[1000px] mx-auto"
+          alt=""
+        />
+        <h1 className="mt-10 font-bold text-4xl transition-all duration-300 mx-auto">
           งานแข่งขันโครงงาน
-          <span
-            className={`${fadeProp.fade} transition-opacity duration-300 text-blue-500 font-bold`}
-          >
-            {WORDS[placeholderId]}
-          </span>
+          <span className={'text-blue-500 font-bold'}><ChangingText /></span>
         </h1>
+        <span className="text-gray-400 block font-bold text-2xl mt-6 ">23-25 กรกฎาคม 2566</span>
       </div>
     </>
   );
