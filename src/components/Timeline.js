@@ -4,7 +4,7 @@ export default function Timeline() {
   const TimelineList = [
     {
       icon: "register.png",
-      title: "ลงทะเบียนผู้เข้าใช้งานและส่งชื่อโครงงาน",
+      title: "ลงทะเบียนผู้เข้าใช้งาน และส่งชื่อโครงงาน",
       date: "12 - 16 มิถุนายน 2566",
     },
     { icon: "files.png", title: "ส่งบทคัดย่อ", date: "30 มิถุนายน 2566" },
@@ -41,9 +41,10 @@ export default function Timeline() {
           </h2>
         </div>
       </div>
-      <div className="grid grid-cols-3 px-40 gap-y-16 mt-14">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:px-40 gap-y-16 mt-14">
+        {/* TODO: Add view timeline as modal */}
         {TimelineList.map((item, index) => (
-          <div className="flex flex-col items-center" key={index}>
+          <div className="flex flex-col items-center text-center" key={index}>
             <div className="bg-white aspect-square grid place-items-center p-5 rounded-[30px]">
               <img src={item.icon} className="max-w-[150px]" alt="" />
             </div>

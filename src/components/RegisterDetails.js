@@ -1,5 +1,6 @@
 import React from 'react'
-
+import Arrow from './Arrow'
+import '../App.css'
 export default function RegisterDetails() {
   return (
     <>
@@ -13,12 +14,13 @@ export default function RegisterDetails() {
           </h2>
         </div>
       </div>
-      <div className='grid grid-cols-3 px-40 mt-14 gap-10'>
-        <div className='bg-white col-span-2 p-20 rounded-[50px]'>
+      <div className='grid lg:grid-cols-3 lg:px-40 mt-14 gap-10'>
+        <div className='bg-white lg:col-span-2 p-14 rounded-[30px]'>
             <span >นำเสนอด้วย</span>
             <h2 className='text-4xl font-black'>วาจา</h2>
         </div>
-        <div className='bg-white p-20 rounded-[50px]'>
+        <div className='relative bg-white p-14 rounded-[30px] detailed-box'>
+            <Arrow className='absolute top-5 right-5 scale-50'/>
             <span >นำเสนอด้วย</span>
             <h2 className='text-4xl font-black'>โปสเตอร์</h2>
         </div>
