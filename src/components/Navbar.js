@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "./Modal";
 
 export default function Navbar() {
   //navbar scroll when active state
   const [navbar, setNavbar] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   //navbar scroll changeBackground function
   const changeBackground = () => {
@@ -26,7 +28,10 @@ export default function Navbar() {
       <div className={`${navbar} fixed z-50 w-full p-4 flex justify-between`}>
         <div></div>
         <div className="bg-[#E7E9F3] p-2 rounded-full flex font-bold">
-          <Link to="/" className=" bg-white px-3 py-2 rounded-full text-[#2a384a]">
+          <Link
+            to="/"
+            className=" bg-white px-3 py-2 rounded-full text-[#2a384a]"
+          >
             หน้าแรก
           </Link>
           <Link to="" className="mx-5 px-3 py-2 rounded-full text-[#2a384a]">
@@ -39,13 +44,15 @@ export default function Navbar() {
             เกี่ยวกับงาน
           </Link>
         </div>
-        <Link to="/register" className="bg-blue-500 p-2 rounded-full flex font-extrabold">
-          <div className="  px-3 py-2 rounded-full text-white">
-            สมัครเลย !
-          </div>
-       
-        </Link>
+        <div
+          onClick={() => setIsOpen(true)}
+          className="bg-blue-500 p-2 rounded-full flex font-extrabold cursor-pointer"
+        >
+          <div className="  px-3 py-2 rounded-full text-white">สมัครเลย !</div>
+        </div>
       </div>
+
+      <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} />
     </div>
   );
 }
