@@ -170,7 +170,7 @@ export default function Register() {
                 <label className="text-2xl font-bold ">สมาชิกทีมคนที่ 3</label>
                 <br />
                 <br />
-                <label className="text-2xl ">ชื่อ - นามสกุล</label>
+                <label className="text-2xl ">ชื่อ - นามสกุล<sup className="text-red-500">*</sup></label>
                 <br />
                 <input
                   className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
@@ -189,7 +189,7 @@ export default function Register() {
                 <label className="text-2xl font-bold ">สมาชิกทีมคนที่ 4</label>
                 <br />
                 <br />
-                <label className="text-2xl ">ชื่อ - นามสกุล</label>
+                <label className="text-2xl ">ชื่อ - นามสกุล<sup className="text-red-500">*</sup></label>
                 <br />
                 <input
                   className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
