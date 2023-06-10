@@ -41,3 +41,11 @@ input::file-selector-button {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.detailed-box:hover circle{
+  fill: #5266FF;
+}
+.detailed-box circle{
+  fill: #999999;
+  transition: all 0.3s 
+}
