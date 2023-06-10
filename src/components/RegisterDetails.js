@@ -41,7 +41,7 @@ export default function RegisterDetails() {
           <Arrow className="absolute top-5 right-5 scale-[.6]" />
           <span>นำเสนอด้วย</span>
           <h2 className="text-4xl font-black">โปสเตอร์</h2>
-          <img src="./img/poster.png" className="mt-14" alt="" />
+          <img src="./img/poster.png" className="mt-14 mx-auto" alt="" />
         </div>
       </div>
     </>
