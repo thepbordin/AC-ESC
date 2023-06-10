@@ -11,9 +11,9 @@ export default function Navbar() {
   const changeBackground = () => {
     // console.log(window.scrollY);
     if (window.scrollY >= 66) {
-      setNavbar("bg-white");
+      setNavbar("");
     } else {
-      setNavbar("false");
+      setNavbar("");
     }
   };
 
