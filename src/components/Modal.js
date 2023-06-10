@@ -117,30 +117,33 @@ export default function Modal(props) {
                   <>
                     <img src="./img/signin.png" />
                     <div className="px-10 pb-10">
-                      <label>ชื่อผู้ใช้งาน</label>
-                      <input
-                        className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      ></input>
-                      <label>รหัสผ่าน</label>
-                      <input
-                        className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      ></input>
-                      <input
-                        className="cursor-pointer my-3 rounded-xl px-5 py-3 font-bold w-full bg-blue-500 text-white text-2xl ease-in-out duration-150 hover:bg-blue-700 "
-                        type="submit"
-                        value="เข้าสู่ระบบ"
-                        onClick={submit}
-                      ></input>
+                      <form onSubmit={submit}>
+                        <label>ชื่อผู้ใช้งาน</label>
+                        <input
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          type="text"
+                          name="username"
+                          placeholder="Username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          required
+                        ></input>
+                        <label>รหัสผ่าน</label>
+                        <input
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        ></input>
+                        <input
+                          className="cursor-pointer my-3 rounded-xl px-5 py-3 font-bold w-full bg-blue-500 text-white text-2xl ease-in-out duration-150 hover:bg-blue-700 "
+                          type="submit"
+                          value="เข้าสู่ระบบ"
+                        ></input>
+                      </form>
                       <p className="text-center text-xl text-[#2a384a]">
                         ยังไม่มีบัญชี?{" "}
                         <span
@@ -156,48 +159,55 @@ export default function Modal(props) {
                   <>
                     <img src="./img/signup.png" />
                     <div className="px-10 pb-10">
-                      <label>ชื่อ - สกุล</label>
-                      <input
-                        className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      ></input>
-                      <label>โรงเรียน</label>
-                      <input
-                        className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
-                        type="text"
-                        name="school"
-                        placeholder="School"
-                        value={school}
-                        onChange={(e) => setSchool(e.target.value)}
-                      ></input>
-                      <label>ชื่อผู้ใช้งาน</label>
-                      <input
-                        className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      ></input>
-                      <label>รหัสผ่าน</label>
-                      <input
-                        className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      ></input>
-                      <input
-                        className="cursor-pointer my-3 rounded-xl px-5 py-3 font-bold w-full bg-blue-500 text-white text-2xl ease-in-out duration-150 hover:bg-blue-700 "
-                        type="submit"
-                        value="ลงทะเบียน"
-                        onClick={signup}
-                      ></input>
+                      <form onSubmit={signup}>
+                        <label>ชื่อ - สกุล</label>
+                        <input
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                        ></input>
+                        <label>โรงเรียน</label>
+                        <input
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          type="text"
+                          name="school"
+                          placeholder="School"
+                          value={school}
+                          onChange={(e) => setSchool(e.target.value)}
+                          required
+                        ></input>
+                        <label>ชื่อผู้ใช้งาน</label>
+                        <input
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          type="text"
+                          name="username"
+                          placeholder="Username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          required
+                        ></input>
+                        <label>รหัสผ่าน</label>
+                        <input
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        ></input>
+                        <input
+                          className="cursor-pointer my-3 rounded-xl px-5 py-3 font-bold w-full bg-blue-500 text-white text-2xl ease-in-out duration-150 hover:bg-blue-700 "
+                          type="submit"
+                          value="ลงทะเบียน"
+                          required
+                        ></input>
+                      </form>
+
                       <p className="text-center text-xl text-[#2a384a]">
                         มีบัญชีอยู่แล้ว?{" "}
                         <span
