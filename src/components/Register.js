@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export default function Register() {
+
   const [memberCount, setMemberCount] = useState(2);
 
+  const [member1, setMember1] = useState("");
+  const [member2, setMember2] = useState("");
+  const [member3, setMember3] = useState("");
+  const [member4, setMember4] = useState("");
 
-
+  const [teacher1, setTeacher1] = useState("");
+  const [teacher2, setTeacher2] = useState("");
 
   const [data, setData] = useState({
     project: "",
@@ -14,22 +21,77 @@ export default function Register() {
     engFile: "",
     leader: "",
     tel: "",
-    member1:"",
-    member2:"",
-    member3:"",
-    member4:"",
-    teacher1:"",
-    teacher2:""
+    members: [],
+    teachers: [],
   });
+
+  const newMemberData = [member1, member2, member3, member4];
+  const newTeacherData = [teacher1, teacher2];
+
+  const removeMember = (memberCount) => {
+    if (memberCount === 3) {
+      setMember3("");
+    } else if (memberCount === 4) {
+      setMember4("");
+    }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
 
-    Swal.fire({
-        title: "ส่งแบบฟอร์มเสร็จสิ้น!",
-        icon: "success",
-        confirmButtonText: "รับทราบ",
+
+    const dataObject = {
+      project: data.project,
+      thaiFile: data.project + " (" + data.leader  + ")" + ".pdf",
+      engFile: data.engFile,
+      leader: data.leader,
+      tel: data.tel,
+      members: newMemberData.filter((str) => str !== ""),
+      teachers: newTeacherData,
+    };
+
+    console.log(dataObject);
+
+    if (data.thaiFile != "") {
+      const formData = new FormData();
+      formData.append("file", data.thaiFile);
+
+      // Get the file from the FormData object
+      const file = formData.get("file");
+
+      // Create a new File object with the updated filename
+      const newFile = new File(
+        [file],
+        data.project +  " (" + data.leader  + ")" + ".pdf",
+        {
+          type: file.type,
+        }
+      );
+
+      // Delete the original file from the FormData object
+      formData.delete("file");
+
+      // Append the new file to the FormData object with the updated filename
+      formData.append("file", newFile, data.project + " (" + data.leader  + ")" + ".pdf");
+
+      // Now the filename in the FormData object is changed to "123123.pdf"
+
+      axios.post(`http://localhost:4000/project/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    }
+    console.log(data.thaiFile);
+
+    axios
+      .post(`http://localhost:4000/project/create`, dataObject)
+      .then((res) => {
+        Swal.fire({
+          title: "ส่งแบบฟอร์มเสร็จสิ้น!",
+          icon: "success",
+          confirmButtonText: "ตกลง",
+        });
       });
   };
 
@@ -49,8 +111,11 @@ export default function Register() {
               </label>
               <br />
               <input
-                className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  data.project === "" ? null : "bg-slate-100 "
+                } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="text"
+                value={data.project}
                 onChange={(e) => {
                   setData({ ...data, project: e.target.value });
                   console.log(data);
@@ -60,34 +125,40 @@ export default function Register() {
             </div>
             <div className="m-5 inline-block">
               <label className="text-2xl">
-                บทคัดย่อภาษาไทย (.pdf)<sup className="text-red-500">*</sup>
+                บทคัดย่อภาษาไทย{" "}
+                <span className="text-slate-300">(.pdf) (ส่งภายหลังได้)</span>
               </label>
               <br />
               <input
-                className={`cursor-pointer my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  data.thaiFile === "" ? null : "bg-slate-100 "
+                } cursor-pointer my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="file"
+                // value={data.thaiFile}
                 onChange={(e) => {
-                  setData({ ...data, thaiFile: e.target.value });
-                  console.log(data);
+                  setData({ ...data, thaiFile: e.target.files[0] });
+                  console.log(data.thaiFile);
                 }}
                 accept="application/pdf"
-                required
               />
             </div>
             <div className="m-5 inline-block">
               <label className="text-2xl">
-                บทคัดย่อภาษาอังกฤษ (.pdf)<sup className="text-red-500">*</sup>
+                บทคัดย่อภาษาอังกฤษ{" "}
+                <span className="text-slate-300">(.pdf) (ส่งภายหลังได้)</span>
               </label>
               <br />
               <input
-                className={`cursor-pointer my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  data.engFile === "" ? null : "bg-slate-100 "
+                } cursor-pointer my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="file"
+                value={data.engFile}
                 onChange={(e) => {
-                    setData({ ...data, engFile: e.target.value });
-                    console.log(data);
-                  }}
+                  setData({ ...data, engFile: e.target.value });
+                  console.log(data);
+                }}
                 accept="application/pdf"
-                required
               />
             </div>
 
@@ -103,12 +174,15 @@ export default function Register() {
               </label>
               <br />
               <input
-                className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  data.leader === "" ? null : "bg-slate-100 "
+                } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="text"
+                value={data.leader}
                 onChange={(e) => {
-                    setData({ ...data, leader: e.target.value });
-                    console.log(data);
-                  }}
+                  setData({ ...data, leader: e.target.value });
+                  console.log(data);
+                }}
                 required
               />
             </div>
@@ -118,14 +192,16 @@ export default function Register() {
               </label>
               <br />
               <input
-                className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  data.tel === "" ? null : "bg-slate-100 "
+                } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="text"
                 placeholder="080-000-0000"
-               
+                value={data.tel}
                 onChange={(e) => {
-                    setData({ ...data, tel: e.target.value });
-                    console.log(data);
-                  }}
+                  setData({ ...data, tel: e.target.value });
+                  console.log(data);
+                }}
                 required
               />
             </div>
@@ -138,12 +214,20 @@ export default function Register() {
               </label>
               <br />
               <input
-                className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  member1 === "" ? null : "bg-slate-100 "
+                } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="text"
+                value={member1}
                 onChange={(e) => {
-                    setData({ ...data, member1: e.target.value });
-                    console.log(data);
-                  }}
+                  setMember1(e.target.value);
+                  // setData({
+                  //   ...data,
+                  //   members: newMemberData.filter((str) => str !== ""),
+                  // });
+                  console.log(newMemberData);
+                  console.log(data);
+                }}
                 required
               />
             </div>
@@ -156,10 +240,18 @@ export default function Register() {
               </label>
               <br />
               <input
-                className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                className={`${
+                  member2 === "" ? null : "bg-slate-100 "
+                } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                 type="text"
+                value={member2}
                 onChange={(e) => {
-                  setData({ ...data, member2: e.target.value });
+                  setMember2(e.target.value);
+                  // setData({
+                  //   ...data,
+                  //   members: newMemberData.filter((str) => str !== ""),
+                  // });
+                  console.log(newMemberData);
                   console.log(data);
                 }}
                 required
@@ -170,15 +262,24 @@ export default function Register() {
                 <label className="text-2xl font-bold ">สมาชิกทีมคนที่ 3</label>
                 <br />
                 <br />
-                <label className="text-2xl ">ชื่อ - นามสกุล<sup className="text-red-500">*</sup></label>
+                <label className="text-2xl ">
+                  ชื่อ - นามสกุล<sup className="text-red-500">*</sup>
+                </label>
                 <br />
                 <input
-                  className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                  className={`${
+                    member3 === "" ? null : "bg-slate-100 "
+                  } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                   type="text"
+                  value={member3}
                   onChange={(e) => {
-                  setData({ ...data, member3: e.target.value });
-                  console.log(data);
-                }}
+                    setMember3(e.target.value);
+                    // setData({
+                    //   ...data,
+                    //   members: newMemberData.filter((str) => str !== ""),
+                    // });
+                    console.log(member3);
+                  }}
                   required
                 />
               </div>
@@ -189,15 +290,24 @@ export default function Register() {
                 <label className="text-2xl font-bold ">สมาชิกทีมคนที่ 4</label>
                 <br />
                 <br />
-                <label className="text-2xl ">ชื่อ - นามสกุล<sup className="text-red-500">*</sup></label>
+                <label className="text-2xl ">
+                  ชื่อ - นามสกุล<sup className="text-red-500">*</sup>
+                </label>
                 <br />
                 <input
-                  className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                  className={`${
+                    member4 === "" ? null : "bg-slate-100 "
+                  } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                   type="text"
+                  value={member4}
                   onChange={(e) => {
-                  setData({ ...data, member4: e.target.value });
-                  console.log(data);
-                }}
+                    setMember4(e.target.value);
+                    // setData({
+                    //   ...data,
+                    //   members: newMemberData.filter((str) => str !== ""),
+                    // });
+                    console.log(member4);
+                  }}
                   required
                 />
               </div>
@@ -220,7 +330,10 @@ export default function Register() {
               <div className="m-5 inline-block">
                 <div
                   className={` my-2  font-bold  rounded-2xl border-2 border-dashed border-slate-200 p-5 w-full text-2xl text-slate-400 duration-150 placeholder:text-xl hover:bg-slate-100  cursor-pointer`}
-                  onClick={() => setMemberCount(memberCount - 1)}
+                  onClick={() => {
+                    setMemberCount(memberCount - 1);
+                    removeMember(memberCount);
+                  }}
                 >
                   - &nbsp;&nbsp;ลดสมาชิก
                 </div>
@@ -239,12 +352,19 @@ export default function Register() {
                   </label>
                   <br />
                   <input
-                    className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                    className={`${
+                      teacher1 === "" ? null : "bg-slate-100 "
+                    } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                     type="text"
+                    value={teacher1}
                     onChange={(e) => {
-                        setData({ ...data, teacher1: e.target.value });
-                        console.log(data);
-                      }}
+                      setTeacher1(e.target.value);
+                      // setData({
+                      //   ...data,
+                      //   teachers: newTeacherData,
+                      // });
+                      console.log(data);
+                    }}
                     required
                   />
                 </div>
@@ -259,12 +379,19 @@ export default function Register() {
                   </label>
                   <br />
                   <input
-                    className={` my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
+                    className={`${
+                      teacher2 === "" ? null : "bg-slate-100 "
+                    } my-2 w-full rounded-2xl border border-slate-200 p-5 text-xl duration-150 placeholder:text-xl focus:outline-blue-500`}
                     type="text"
+                    value={teacher2}
                     onChange={(e) => {
-                        setData({ ...data, teacher2: e.target.value });
-                        console.log(data);
-                      }}
+                      setTeacher2(e.target.value);
+                      // setData({
+                      //   ...data,
+                      //   teachers: newTeacherData,
+                      // });
+                      console.log(data);
+                    }}
                     required
                   />
                 </div>
