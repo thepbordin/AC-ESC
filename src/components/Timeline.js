@@ -41,7 +41,7 @@ export default function Timeline() {
           </h2>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 lg:px-40 gap-y-16 mt-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-40  gap-y-16 mt-14">
         {/* TODO: Add view timeline as modal */}
         {TimelineList.map((item, index) => (
           <div className="flex flex-col items-center text-center" key={index}>
