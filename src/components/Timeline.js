@@ -45,7 +45,7 @@ export default function Timeline() {
       <div className="py-16 bg-white">
         <div className="text-center mt-5">
           <h1 className="font-black mx-auto text-5xl text-[#2A384A] ">
-            กำหนดการณ์
+            กำหนดการ
           </h1>
           <div className="bg-blue-500 max-w-max mx-auto px-12 py-0.5 rounded-lg mt-3">
             <h2 className="font-black uppercase text-xl inline text-white ">
