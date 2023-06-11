@@ -120,7 +120,7 @@ export default function Modal(props) {
                       <form onSubmit={submit}>
                         <label>ชื่อผู้ใช้งาน</label>
                         <input
-                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-500 focus:outline-blue-500 outline-gray-100"
                           type="text"
                           name="username"
                           placeholder="Username"
@@ -130,7 +130,7 @@ export default function Modal(props) {
                         ></input>
                         <label>รหัสผ่าน</label>
                         <input
-                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-150 focus:outline-blue-500"
+                          className="border-2 mb-5 mt-1 rounded-xl py-2 px-5 w-full border-gray-100 text-2xl ease-in-out duration-500 focus:outline-blue-500 outline-gray-100"
                           type="password"
                           name="password"
                           placeholder="Password"
