@@ -19,7 +19,7 @@ export default function RegisterDetails() {
           <span>นำเสนอด้วย</span>
           <h2 className="text-4xl font-black">วาจา</h2>
           <div className="">
-            <div className="flex md:flex-row flex-col ">
+            <div className="flex md:flex-row flex-col justify-center items-center">
               <div className="text-center detailed-box md:border-r-2 border-black border-opacity-20">
                 <img src="./img/thai.png" className="mb-5" alt="" />
                 <div className="flex flex-row items-center justify-center">
