@@ -56,8 +56,8 @@ export default function Timeline() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:px-40  gap-y-16 mt-10 ">
           {/* TODO: Add view timeline as modal */}
           {TimelineList.map((item, index) => (
-            <div className="flex flex-col items-center text-center" key={index}>
-              <div className="bg-gray-100 aspect-square max-w-[190px] grid place-items-center p-5 rounded-[30px] overflow-hidden">
+            <div className="flex flex-col items-center text-center " key={index}>
+              <div className="bg-gray-100 aspect-square max-w-[190px] grid place-items-center p-5 rounded-[30px] overflow-hidden timeline relative">
                 <img src={"img/"+ item.icon} className="max-w-[150px] object-contain" alt="" />
               </div>
 
